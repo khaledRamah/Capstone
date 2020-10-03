@@ -3,7 +3,7 @@
   hosts: [localhost]
   gather_facts: false
   vars:
-    ansible_python_interpreter: /usr/bin/python3
+    ansible_python_interpreter: /usr/bin/python3.8
     application: app
   tasks:
     - name: create instances
