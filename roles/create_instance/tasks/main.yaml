@@ -1,5 +1,6 @@
 - name: Create EC2 instance
   ec2:
+    name : develpment_web_server
     # key_name: jankins
     instance_type: t2.medium
     image: ami-003634241a8fcdec0
@@ -8,7 +9,7 @@
     region: us-west-2
     wait: yes
     instance_tags:
-      Name: main_web_server
+      Name: develpment_web_server
       application: "{{ application }}"
     exact_count: 1
     count_tag:
