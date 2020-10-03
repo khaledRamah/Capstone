@@ -18,4 +18,4 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 kubectl taint nodes --all node-role.kubernetes.io/master-
-kubectl apply -f nginx.yml
+kubectl apply -f nginx.yml --wait
