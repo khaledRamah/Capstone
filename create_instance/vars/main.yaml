@@ -1,0 +1,1 @@
+USERDATA: "{{ lookup('file', 'user_data.sh') }}"
