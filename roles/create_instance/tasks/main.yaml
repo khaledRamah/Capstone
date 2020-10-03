@@ -8,7 +8,7 @@
     region: us-west-2
     wait: yes
     instance_tags:
-      Name: web_server
+      Name: main_web_server
       application: "{{ application }}"
     exact_count: 1
     count_tag:
