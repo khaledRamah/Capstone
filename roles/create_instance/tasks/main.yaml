@@ -1,6 +1,5 @@
 - name: Create EC2 instance
   ec2:
-    name : main_web_server
     # key_name: jankins
     instance_type: t2.medium
     image: ami-003634241a8fcdec0
