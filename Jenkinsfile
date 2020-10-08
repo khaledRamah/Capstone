@@ -56,6 +56,7 @@ pipeline {
             steps {
                 echo 'Deploy Image'
             }
+            }
         }
     }
 }
