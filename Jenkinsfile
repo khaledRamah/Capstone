@@ -48,15 +48,13 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Images') {
-            agent {
-            kubernetes {
-                 yamlFile webserver.yaml
-            }
-            steps {
-                echo 'Deploy Image'
-            }
-            }
+         stage('Deploying') {
+              steps{
+                  echo 'Deploying to AWS...'
+                  withAWS(credentials: 'AWSCred', region: 'us-west-2') {
+                      sh "kubectl get nodes"
+                  }
+              }
         }
     }
 }
