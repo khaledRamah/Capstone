@@ -49,8 +49,11 @@ pipeline {
             }
         }
         stage('deploy images') {
-            steps {
-                sh("kubectl apply -f webserver.yml")
+            stage('Run maven') {
+                agent {
+                    kubernetes {
+                        yamlFile webserver.yaml
+                }
             }
         }
     }
