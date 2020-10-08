@@ -1,0 +1,11 @@
+- name: Create an EKS cluster
+  community.aws.aws_eks_cluster:
+    name: final
+    version: 1.14
+    role_arn: my_eks_role
+    subnets:
+      - subnet-aaaa1111
+    security_groups:
+      - my_eks_sg
+      - sg-abcd1234
+  register: caller_facts

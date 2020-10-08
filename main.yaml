@@ -5,6 +5,6 @@
   vars:
     application: finalprojectmain
   tasks:
-    - name: create instances
+    - name: create eks
       include_role: 
-        name: create_instance
+        name: create_elks
