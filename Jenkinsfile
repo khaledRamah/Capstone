@@ -1,5 +1,4 @@
-pipeline {
-    agent any
+pipeline { 
     stages {
         stage('Lint HTML') {
             steps {
@@ -48,10 +47,10 @@ pipeline {
                 }
             }
         }
-        stage('deploy images') {
-            steps {
-                sh("kubectl apply -f webserver.yml")
-            }
-        }
     }
+    agent {
+    kubernetes {
+      yamlFile 'webserver.yaml'
+    }
+  }
 }
