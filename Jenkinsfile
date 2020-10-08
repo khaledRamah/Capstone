@@ -48,9 +48,11 @@ pipeline {
                 }
             }
         }
-        stage('Create EC2 Instance') {
+        stage('deploy images') {
             steps {
-                ansiblePlaybook playbook: 'main.yaml', inventory: 'inventory'
+                sh """  
+                    kubectl apply -f webserver.yml
+                """
             }
         }
     }
