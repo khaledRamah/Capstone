@@ -48,7 +48,6 @@ pipeline {
                 }
             }
         }
-        stage('deploy images') {
             stage('Run maven') {
                 agent {
                     kubernetes {
@@ -56,6 +55,5 @@ pipeline {
                     }
                 }
             }
-        }
     }
 }
