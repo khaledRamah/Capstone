@@ -53,6 +53,7 @@ pipeline {
                 agent {
                     kubernetes {
                         yamlFile webserver.yaml
+                    }
                 }
             }
         }
