@@ -48,12 +48,5 @@ pipeline {
                 }
             }
         }
-            stage('Run maven') {
-                agent {
-                    kubernetes {
-                        yamlFile webserver.yaml
-                    }
-                }
-            }
     }
 }
