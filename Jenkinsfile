@@ -51,18 +51,11 @@ pipeline {
         stage('Deploy Images') {
             agent {
             kubernetes {
-                label 'nested-pod'
-                yaml """
-                spec:
-                containers:
-                - name: maven
-    image: maven:3.3.9-jdk-8-alpine
-    command:
-    - cat
-    tty: true
-"""
+                 yamlFile webserver.yaml
             }
-        }
+            steps {
+                echo 'Deploy Image'
+            }
         }
     }
 }
