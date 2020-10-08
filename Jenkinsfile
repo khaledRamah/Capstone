@@ -50,9 +50,7 @@ pipeline {
         }
         stage('deploy images') {
             steps {
-                sh """  
-                    kubectl apply -f webserver.yml
-                """
+                sh("kubectl apply -f webserver.yml")
             }
         }
     }
