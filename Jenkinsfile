@@ -40,6 +40,7 @@ pipeline {
                      sh "aws eks --region us-west-2 update-kubeconfig --name my-cluster"
                      sh "kubectl config use-context arn:aws:eks:us-west-2:874698838459:cluster/my-cluster"
                      sh "kubectl apply -f webserver.yml"
+                     sh "kubectl apply -f webservice.yml"
                   }
               }
         }
