@@ -9,6 +9,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo '=== Building Docker Image ===' 
+                echo env.BuildNo
+                script {
                     env.BuildNo = 1
                     app = docker.build("khaledgamalelsayed/webserver:" + env.BuildNo)
                 }
@@ -21,6 +23,7 @@ pipeline {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerCred') {
+                        app.push("$SHORT_COMMIT")
                         app.push(env.BuildNo)
                     }
                 }
