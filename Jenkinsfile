@@ -8,7 +8,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                echo '=== Building Docker Image ==='
+                echo '=== Building Docker Image ===' 
+                echo env.BuildNo
                 script {
                     if (env.BuildNo) {
                             env.BuildNo = env.BuildNo + 1
