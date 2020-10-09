@@ -21,4 +21,4 @@ spec:
         - containerPort: 80
   strategy:
     type: RollingUpdate
-    rollingUp      maxSurge: 50%
+    # maxSurge: 50%
