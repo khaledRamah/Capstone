@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webserver
-        image: khaledgamalelsayed/webserver:latest
+        image: khaledgamalelsayed/webserver:$BuildNo
         ports:
         - containerPort: 80
   strategy:
