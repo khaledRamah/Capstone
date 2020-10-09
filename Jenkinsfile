@@ -22,7 +22,11 @@ pipeline {
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerCred') {
                         app.push("$SHORT_COMMIT")
-                        app.push("latest")
+                        if (env.BuildNo) {
+                            app.push(env.BuildNo + 1)
+                        } else {
+                           app.push(1) 
+                        }
                     }
                 }
             }
