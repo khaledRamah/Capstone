@@ -37,8 +37,8 @@ pipeline {
               steps{
                   echo 'Deploying to AWS...'
                   withAWS(credentials: 'AWSCred', region: 'us-west-2') {
-                     sh "aws eks --region us-west-2 update-kubeconfig --name Capstone-Cluster"
-                     sh "kubectl config use-context arn:aws:eks:us-west-2:874698838459:cluster/Capstone-Cluster"
+                     sh "aws eks --region us-west-2 update-kubeconfig --name eks-cluster"
+                     sh "kubectl config use-context arn:aws:eks:us-west-2:874698838459:cluster/eks-cluster"
                      sh "kubectl apply -f webserver.yml"
                      sh "kubectl apply -f webservice.yml"
                   }
