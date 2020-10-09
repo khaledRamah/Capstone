@@ -19,3 +19,6 @@ spec:
         image: khaledgamalelsayed/webserver:latest
         ports:
         - containerPort: 80
+  strategy:
+    type: RollingUpdate
+    rollingUp      maxSurge: 50%
