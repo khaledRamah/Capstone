@@ -10,7 +10,12 @@ pipeline {
             steps {
                 echo '=== Building Docker Image ==='
                 script {
-                    app = docker.build("khaledgamalelsayed/webserver")
+                    if (env.BuildNo) {
+                            env.BuildNo = env.BuildNo + 1
+                        } else {
+                            env.BuildNo = 1
+                        }
+                    app = docker.build("khaledgamalelsayed/webserver:" + env.BuildNo)
                 }
             }
         }
