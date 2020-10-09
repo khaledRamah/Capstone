@@ -11,12 +11,7 @@ pipeline {
                 echo '=== Building Docker Image ===' 
                 echo env.BuildNo
                 script {
-                    if (env.BuildNo) {
-                            env.BuildNo = env.BuildNo + 1
-                        } else {
-                            env.BuildNo = 1
-                        }
-                    app = docker.build("khaledgamalelsayed/webserver:" + env.BuildNo)
+                    app = docker.build("khaledgamalelsayed/webserver:latest")
                 }
             }
         }
@@ -28,7 +23,7 @@ pipeline {
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerCred') {
                         app.push("$SHORT_COMMIT")
-                        app.push(env.BuildNo)
+                        app.push("latest")
                     }
                 }
             }
@@ -45,7 +40,6 @@ pipeline {
                   withAWS(credentials: 'AWSCred', region: 'us-west-2') {
                      sh "aws eks --region us-west-2 update-kubeconfig --name eks-cluster"
                      sh "kubectl config use-context arn:aws:eks:us-west-2:874698838459:cluster/eks-cluster"
-                     sh "kubectl set image deployments/webserver-deployment webserver=khaledgamalelsayed/webserver:" + env.BuildNo
                      sh "kubectl apply -f webserver.yml"
                      sh "kubectl apply -f webservice.yml"
                   }

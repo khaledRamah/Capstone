@@ -17,6 +17,7 @@ spec:
       containers:
       - name: webserver
         image: khaledgamalelsayed/webserver:lastest
+        imagePullPolicy : Always
         ports:
         - containerPort: 80
   strategy:
