@@ -22,7 +22,6 @@ pipeline {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerCred') {
-                        echo SHORT_COMMIT
                         app.push(SHORT_COMMIT)
                         app.push("latest")
                     }
@@ -41,7 +40,7 @@ pipeline {
                   withAWS(credentials: 'AWSCred', region: 'us-west-2') {
                      sh "aws eks --region us-west-2 update-kubeconfig --name Capstone-cluster"
                      sh "kubectl config use-context arn:aws:eks:us-west-2:874698838459:cluster/Capstone-cluster"
-                     sh "kubectl set image deployments/webserver webserver=khaledgamalelsayed/webserver:latest"
+                     sh "kubectl set image deployments/webserver webserver=khaledgamalelsayed/webserver" + SHORT_COMMIT
                      sh "kubectl apply -f webserver.yml"
                      sh "kubectl apply -f webservice.yml"
                   }
