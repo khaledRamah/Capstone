@@ -11,8 +11,7 @@ pipeline {
                 echo '=== Building Docker Image ===' 
                 echo env.BuildNo
                 script {
-                    env.BuildNo = 1
-                    app = docker.build("khaledgamalelsayed/webserver:" + env.BuildNo)
+                    app = docker.build("khaledgamalelsayed/webserver")
                 }
             }
         }
@@ -23,7 +22,7 @@ pipeline {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerCred') {
-                        app.push(env.BuildNo)
+                        app.push("latest")
                     }
                 }
             }
@@ -40,7 +39,7 @@ pipeline {
                   withAWS(credentials: 'AWSCred', region: 'us-west-2') {
                      sh "aws eks --region us-west-2 update-kubeconfig --name Capstone-cluster"
                      sh "kubectl config use-context arn:aws:eks:us-west-2:874698838459:cluster/Capstone-cluster"
-                     sh "kubectl set image deployments/webserver webserver=khaledgamalelsayed/webserver:" + env.BuildNo
+                     sh "kubectl set image deployments/webserver webserver=khaledgamalelsayed/webserver:latest"
                      sh "kubectl apply -f webserver.yml"
                      sh "kubectl apply -f webservice.yml"
                   }
