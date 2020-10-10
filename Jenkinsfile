@@ -31,8 +31,7 @@ pipeline {
         stage('Remove local images') {
             steps {
                 echo '=== Delete the local docker images ==='
-                sh("docker rmi -f khaledgamalelsayed/webserver:" + SHORT_COMMIT)
-                sh "docker system prune"
+                sh "docker system prune -f --all"
             }
         }
          stage('Deploying') {
